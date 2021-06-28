@@ -1,0 +1,14 @@
+{
+    "name": "Bird2Board",
+    "description": "Convert bird based bookmarks to board one",
+    "version": "0.1",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["storage", "activeTab", "scripting"],
+    "action": {
+        "default_title": "Bird2Board",
+        "default_popup": "popup.html"
+    }
+}
