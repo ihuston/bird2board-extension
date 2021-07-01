@@ -2,7 +2,7 @@
 
 let load = document.getElementById("load");
 
-// When the button is clicked, inject setPageBackgroundColor into current page
+// When the button is clicked, inject function into current page
 load.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   
@@ -15,5 +15,8 @@ load.addEventListener("click", async () => {
 // The body of this function will be executed as a content script inside the
 // current page
 function loadTweets() {
-    console.log("Tweets loaded.")
+  // Listen for network events to Twitter Bookmarks API
+
+//    console.log("Started listening.")
 }
+
