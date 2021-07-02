@@ -1,15 +1,16 @@
 "use strict";
 
-chrome.runtime.onMessage.addListener((message, sender, response) => {
-  console.log(message);
-  console.log(sender);
-  response({'message': "goodbye"})
-}  );
+// Background page -- background.js
+chrome.runtime.onConnect.addListener(function(devToolsConnection) {
+  // assign the listener function to a variable so we can remove it later
+  let devToolsListener = function(message, sender, sendResponse) {
+      console.log("Message received: ", message);
+  }
+  // add the listener
+  devToolsConnection.onMessage.addListener(devToolsListener);
 
-
-chrome.runtime.onInstalled.addListener(() => {
-  console.log('Bird2Board loaded');
-
-  
+  devToolsConnection.onDisconnect.addListener(function() {
+       devToolsConnection.onMessage.removeListener(devToolsListener);
+  });
 });
 

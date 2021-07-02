@@ -13,5 +13,5 @@
         "default_title": "Bird2Board",
         "default_popup": "popup.html"
     },
-    "devtools_page": "devtools.html"
+    "devtools_page": "bird2board-devtools.html"
 }
