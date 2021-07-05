@@ -8,9 +8,10 @@ let backgroundPageConnection = chrome.runtime.connect({
 
 backgroundPageConnection.onMessage.addListener(function (message) {
     // Handle responses from the background page, if any
+    console.log("Response received: ", message);
 });
 
 
 backgroundPageConnection.postMessage({
-    message: "Starting up"
+    message: "Devtools Starting up"
 });
