@@ -13,5 +13,29 @@ backgroundPageConnection.onMessage.addListener(function (message) {
 
 
 backgroundPageConnection.postMessage({
-    message: "Devtools Starting up"
+    message: "Devtools Connecting"
 });
+
+chrome.devtools.network.onRequestFinished.addListener(request => {
+    request.getContent((body) => {
+      if (request.request && request.request.url) {
+        if (request.request.url.includes('https://twitter.com/i/api/graphql/*')) {
+          backgroundPageConnection.postMessage({
+            type: "bookmark-data",  
+            response: body
+          });
+        }
+      }
+    });
+  });
+
+
+chrome.devtools.network.onRequestFinished.addListener(
+function(request) {
+    if (request.response.bodySize > 40*102) {
+    chrome.devtools.inspectedWindow.eval(
+        'console.log("Large image: " + unescape("' +
+        escape(request.request.url) + '"))');
+    }
+}
+);
