@@ -22,16 +22,16 @@ function handleRequestFinished(request) {
   
 chrome.devtools.network.onRequestFinished.addListener(handleRequestFinished);
 
-// chrome.devtools.network.onRequestFinished.addListener(request => {
-//     console.log("Network traffic devtools")
-//     // request.getContent((body) => {
-//     //   if (request.request && request.request.url) {
-//     //     if (request.request.url.includes('https://twitter.com/i/api/graphql/*')) {
-//     //       backgroundPageConnection.postMessage({
-//     //         type: "bookmark-data",  
-//     //         response: body
-//     //       });
-//     //     }
-//     //   }
-//     // });
-//   });
+chrome.devtools.network.onRequestFinished.addListener(request => {
+    console.log("Network traffic devtools")
+    request.getContent((body) => {
+      if (request.request && request.request.url) {
+        if (request.request.url.includes('https://twitter.com/i/api/graphql/*')) {
+          backgroundPageConnection.postMessage({
+            type: "bookmark-data",  
+            response: body
+          });
+        }
+      }
+    });
+  });
