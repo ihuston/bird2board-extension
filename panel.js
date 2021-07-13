@@ -12,17 +12,17 @@ backgroundPageConnection.onMessage.addListener(function (message) {
 
 chrome.devtools.network.onRequestFinished.addListener(request => {
     console.log("Network traffic...");
-    // request.getContent((body) => {
-    //   if (request.request && request.request.url) {
-    //     if (request.request.url.includes('https://twitter.com/i/api/graphql/*')) {
-    //         console.log("Found bookmark data.")
-    //       backgroundPageConnection.postMessage({
-    //         type: "bookmark-data",  
-    //         response: body
-    //       });
-    //     }
-    //   }
-    // });
+    request.getContent((body) => {
+      if (request.request && request.request.url) {
+        if (request.request.url.includes('https://twitter.com/i/api/graphql/*')) {
+            console.log("Found bookmark data.")
+          backgroundPageConnection.postMessage({
+            type: "bookmark-data",  
+            response: body
+          });
+        }
+      }
+    });
   });
 
 backgroundPageConnection.postMessage({
